@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Grocery_App</string>
+    <string name="login">Login</string>
+    <string name="userlogin">userLogin</string>
+    <string name="email">Email</string>
+    <string name="forgot_password">Forgot password ?</string>
+    <string name="password">Password</string>
+    <string name="not_have_account">Not have account ?</string>
+    <string name="register">Register</string>
+    <string name="full_name">Full name</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="are_you_a_seller">Are you a seller ?</string>
+    <string name="register_as_seller">Register as seller</string>
+    <string name="stage">Stage</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
 </resources>
