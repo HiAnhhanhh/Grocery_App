@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Grocery_App"
         tools:targetApi="31">
+        <activity
+            android:name=".MainUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainSellerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" />
         <activity
             android:name=".RegisterSellerActivity"
             android:exported="false" />

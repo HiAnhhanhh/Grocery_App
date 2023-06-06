@@ -6,15 +6,20 @@
     <string name="forgot_password">Forgot password ?</string>
     <string name="password">Password</string>
     <string name="not_have_account">Not have account ?</string>
-    <string name="register">Register</string>
+    <string name="register_user">Register User</string>
     <string name="full_name">Full name</string>
     <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="confirm_password">Confirm password</string>
     <string name="are_you_a_seller">Are you a seller ?</string>
     <string name="register_as_seller">Register as seller</string>
-    <string name="stage">Stage</string>
+    <string name="state">State</string>
     <string name="country">Country</string>
     <string name="city">City</string>
     <string name="Gps">Gps</string>
+    <string name="enter_full_name">Enter Full name</string>
+    <string name="shop_name">Shop Name</string>
+    <string name="register_seller">Register Seller</string>
+    <string name="register">Register</string>
+    <string name="delivery_fee">Delivery Fee</string>
 </resources>
