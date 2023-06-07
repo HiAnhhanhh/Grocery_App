@@ -24,4 +24,5 @@
     <string name="delivery_fee">Delivery Fee</string>
     <string name="recover_password">Recover Password</string>
     <string name="back">Back</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterSellerActivity">
+    tools:context=".EditProfileActivity">
+
 
     <RelativeLayout
         android:id="@+id/registerRl"
@@ -17,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="@string/register_seller"
+            android:text="@string/edit_profile"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -37,7 +38,7 @@
         android:id="@+id/iconImv"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/baseline_key_24"
+        android:src="@drawable/baseline_edit_24_gray"
         android:background="@drawable/shape_circle"
         android:padding="15dp"
         android:layout_marginTop="40dp"
@@ -275,86 +276,27 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/emailTil"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp">
-
-                        <EditText
-                            android:id="@+id/emailEt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:autofillHints="no"
-                            android:drawableStart="@drawable/baseline_email_24"
-                            android:drawablePadding="10dp"
-                            android:hint="Email"
-                            android:inputType="textEmailAddress"
-                            android:padding="12dp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/gray01"
-                            android:textSize="18sp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/passwordTil"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp">
-
-                        <EditText
-                            android:id="@+id/passwordEt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:autofillHints="no"
-                            android:drawableStart="@drawable/baseline_lock_24"
-                            android:drawablePadding="10dp"
-                            android:hint="@string/password"
-                            android:inputType="textPassword"
-                            android:padding="12dp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/gray01"
-                            android:textSize="18sp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/confirmPasswordTil"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp">
-
-                        <EditText
-                            android:id="@+id/confirmPasswordEt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:autofillHints="no"
-                            android:drawableStart="@drawable/baseline_lock_24"
-                            android:drawablePadding="10dp"
-                            android:hint="@string/confirm_password"
-                            android:inputType="textPassword"
-                            android:padding="12dp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/gray01"
-                            android:textSize="18sp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
             </RelativeLayout>
 
+            <androidx.appcompat.widget.SwitchCompat
+                android:padding="10dp"
+                android:id="@+id/shopOpenSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/registerSv"
+                android:text="Open"
+                android:textSize="18sp"/>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_marginTop="5dp"
-                android:id="@+id/registerBtn"
+                android:id="@+id/updateBtn"
                 android:layout_width="150dp"
-                android:layout_below="@id/registerSv"
+                android:layout_below="@id/shopOpenSwitch"
                 android:layout_height="wrap_content"
-                android:text="@string/register"
+                android:text="Update"
                 android:textAllCaps="false"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -363,37 +305,11 @@
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"/>
 
-            <LinearLayout
-                android:layout_alignParentBottom="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/registerBtn"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="25dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/are_you_a_seller"
-                    android:textSize="18sp"/>
-
-                <TextView
-                    android:id="@+id/registerTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/register_as_seller"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginStart="5dp"/>
-
-            </LinearLayout>
 
         </RelativeLayout>
 
     </ScrollView>
-
 
 
 </RelativeLayout>

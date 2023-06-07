@@ -36,11 +36,20 @@ public class MainSellerActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         firebaseAuth = FirebaseAuth.getInstance();
+        checkUser();
 
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 makeOffline();
+            }
+        });
+
+        binding.editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainSellerActivity.this, EditProfileActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -55,7 +64,8 @@ public class MainSellerActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-
+                        firebaseAuth.signOut();
+                        startActivity(new Intent(MainSellerActivity.this, LoginActivity.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -81,11 +91,9 @@ public class MainSellerActivity extends AppCompatActivity {
     }
 
     private void loadInfo() {
-
         Log.d(TAG, "loadInfo: Success");
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
-        ref.child(firebaseAuth.getUid())
-
+        ref.orderByChild("uid").equalTo(firebaseAuth.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -94,7 +102,7 @@ public class MainSellerActivity extends AppCompatActivity {
                             String fullName = ""+ds.child("fullName").getValue();
                             String userType = ""+ ds.child("userType").getValue();
                             Log.d(TAG, "onDataChange: "+ fullName + userType);
-                            binding.fullNameTv.setText(fullName+ "( "+ userType +" )");
+                            binding.fullNameTv.setText(fullName);
                         }
 
                     }

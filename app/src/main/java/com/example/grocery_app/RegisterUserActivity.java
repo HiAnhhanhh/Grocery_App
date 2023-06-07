@@ -71,12 +71,6 @@ public class RegisterUserActivity extends AppCompatActivity {
             }
         });
 
-        binding.gpsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         binding.profileImv.setOnClickListener(new View.OnClickListener() {
             @Override

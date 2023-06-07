@@ -30,14 +30,6 @@
             android:contentDescription="Back"
             android:src="@drawable/baseline_arrow_back_ios_24" />
 
-        <ImageButton
-            android:id="@+id/gpsBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:background="@color/transparent"
-            android:contentDescription="@string/Gps"
-            android:src="@drawable/baseline_gps_fixed_24" />
 
     </RelativeLayout>
 

@@ -30,6 +30,14 @@
             android:layout_alignParentEnd="true"
             android:src="@drawable/baseline_logout_24"/>
 
+        <ImageButton
+            android:id="@+id/editBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toStartOf="@id/logoutBtn"
+            android:background="@color/transparent"
+            android:src="@drawable/baseline_edit_24"/>
+
     </RelativeLayout>
 
 
