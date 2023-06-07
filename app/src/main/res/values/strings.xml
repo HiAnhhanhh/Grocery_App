@@ -22,4 +22,6 @@
     <string name="register_seller">Register Seller</string>
     <string name="register">Register</string>
     <string name="delivery_fee">Delivery Fee</string>
+    <string name="recover_password">Recover Password</string>
+    <string name="back">Back</string>
 </resources>

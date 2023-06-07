@@ -69,18 +69,21 @@ public class LoginActivity extends AppCompatActivity {
     String email, password;
 
     private void loginUser() {
-         progressDialog.setMessage("Logging In ...");
-         progressDialog.show();
-
          email = binding.emailEt.getText().toString().trim();
          password = binding.passwordEt.getText().toString().trim();
 
          if( !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
              Toast.makeText(this, "Invalid email pattern", Toast.LENGTH_SHORT).show();
+             return;
          }
          if(TextUtils.isEmpty(password)){
              Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show();
+             return;
          }
+
+        progressDialog.setMessage("Logging In ...");
+        progressDialog.show();
+
 
          firebaseAuth.signInWithEmailAndPassword(email,password)
                  .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
