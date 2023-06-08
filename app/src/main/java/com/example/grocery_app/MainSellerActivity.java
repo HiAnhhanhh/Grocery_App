@@ -48,7 +48,7 @@ public class MainSellerActivity extends AppCompatActivity {
         binding.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainSellerActivity.this, EditProfileActivity.class);
+                Intent intent = new Intent(MainSellerActivity.this, EditProfileSellerActivity.class);
                 startActivity(intent);
             }
         });

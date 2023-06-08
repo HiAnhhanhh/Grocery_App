@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfileSellerActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/registerRl"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/shape_rect01"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/edit_profile"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/transparent"
+            android:contentDescription="@string/back"
+            android:src="@drawable/baseline_arrow_back_ios_24" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iconImv"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/baseline_edit_24_gray"
+        android:background="@drawable/shape_circle"
+        android:padding="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true" />
+
+    <ScrollView
+        android:layout_below="@id/iconImv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_marginTop="5dp"
+                android:id="@+id/editProfileImv"
+                android:layout_width="90dp"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/Circular"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/baseline_account_circle_24"
+                android:layout_height="90dp"
+                android:background="@drawable/shape_circle02"/>
+
+            <RelativeLayout
+                android:id="@+id/registerSv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editProfileImv"
+                android:layout_marginTop="3dp">
+
+                <LinearLayout
+                    android:id="@+id/registerLl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/fullNAmeTil"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/fullNameEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="no"
+                            android:drawableStart="@drawable/baseline_account_circle_24"
+                            android:drawablePadding="10dp"
+                            android:hint="@string/full_name"
+                            android:inputType="text"
+                            android:padding="12dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray01"
+                            android:textSize="18sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/shopTil"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <EditText
+                            android:id="@+id/shopEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="no"
+                            android:drawableStart="@drawable/baseline_store_24"
+                            android:drawablePadding="6dp"
+                            android:hint="@string/shop_name"
+                            android:inputType="text"
+                            android:padding="12dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray01"
+                            android:textSize="18sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/phoneTil"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <EditText
+                            android:id="@+id/phoneEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="no"
+                            android:drawableStart="@drawable/baseline_phone_android_24"
+                            android:drawablePadding="6dp"
+                            android:hint="@string/phone"
+                            android:inputType="text"
+                            android:padding="12dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray01"
+                            android:textSize="18sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/deliveryFeeTil"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <EditText
+                            android:id="@+id/deliveryFeeEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="no"
+                            android:drawableStart="@drawable/baseline_local_shipping_24"
+                            android:drawablePadding="6dp"
+                            android:hint="@string/delivery_fee"
+                            android:inputType="text"
+                            android:padding="12dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray01"
+                            android:textSize="18sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/countryTil"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/countryEt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:autofillHints="no"
+                                android:drawableStart="@drawable/baseline_location_on_24"
+                                android:drawablePadding="6dp"
+                                android:hint="@string/country"
+                                android:inputType="text"
+                                android:padding="12dp"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/gray01"
+                                android:textSize="18sp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/stateTil"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
+                            app:hintEnabled="false">
+
+                            <EditText
+
+                                android:id="@+id/stateEt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:autofillHints="no"
+                                android:drawableStart="@drawable/baseline_location_on_24"
+                                android:drawablePadding="10dp"
+                                android:hint="@string/state"
+                                android:inputType="text"
+                                android:padding="12dp"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/gray01"
+                                android:textSize="18sp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/cityTil"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/cityEt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:autofillHints="no"
+                                android:drawableStart="@drawable/baseline_location_on_24"
+                                android:drawablePadding="10dp"
+                                android:hint="@string/city"
+                                android:inputType="text"
+                                android:padding="12dp"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/gray01"
+                                android:textSize="18sp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/addressTil"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <EditText
+                            android:id="@+id/addressEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="no"
+                            android:drawableStart="@drawable/baseline_location_on_24"
+                            android:drawablePadding="10dp"
+                            android:hint="@string/address"
+                            android:inputType="text"
+                            android:padding="12dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray01"
+                            android:textSize="18sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <Switch
+                android:id="@+id/shopOpenSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/registerSv"
+                android:text="@string/open"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:padding="10dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="5dp"
+                android:id="@+id/updateBtn"
+                android:layout_width="150dp"
+                android:layout_below="@+id/shopOpenSwitch"
+                android:layout_height="wrap_content"
+                android:text="@string/update"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/shape_rect03"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"/>
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>
