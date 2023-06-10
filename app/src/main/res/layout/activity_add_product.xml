@@ -34,7 +34,7 @@
 
     <ScrollView
         android:layout_below="@id/addProductRl"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -43,13 +43,12 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:layout_marginTop="5dp"
-                android:id="@+id/editProfileImv"
+                android:id="@+id/productImageImv"
                 android:layout_width="90dp"
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/Circular"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/baseline_account_circle_24"
+                android:src="@drawable/baseline_add_shopping_cart_24_gray"
                 android:layout_height="90dp"
                 android:background="@drawable/shape_circle02"/>
 
@@ -57,7 +56,7 @@
                 android:id="@+id/registerSv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/editProfileImv"
+                android:layout_below="@id/productImageImv"
                 android:layout_marginTop="3dp">
 
                 <LinearLayout
@@ -131,7 +130,8 @@
                             android:padding="12dp"
                             android:textColor="@color/black"
                             android:textColorHint="@color/gray01"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:drawableEnd="@drawable/baseline_keyboard_arrow_down_24"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -183,7 +183,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <Switch
-                        android:id="@+id/shopOpenSwitch"
+                        android:id="@+id/discountSwitch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/registerSv"
@@ -247,7 +247,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_marginTop="5dp"
-                android:id="@+id/updateBtn"
+                android:id="@+id/addProductBtn"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/registerSv"

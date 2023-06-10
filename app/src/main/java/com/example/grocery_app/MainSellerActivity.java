@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.example.grocery_app.databinding.ActivityMainSellerBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,6 +50,14 @@ public class MainSellerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainSellerActivity.this, EditProfileSellerActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.addProductBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainSellerActivity.this, AddProductActivity.class);
                 startActivity(intent);
             }
         });
@@ -100,9 +109,14 @@ public class MainSellerActivity extends AppCompatActivity {
 
                         for( DataSnapshot ds : snapshot.getChildren()){
                             String fullName = ""+ds.child("fullName").getValue();
-                            String userType = ""+ ds.child("userType").getValue();
-                            Log.d(TAG, "onDataChange: "+ fullName + userType);
+                            String email = ""+ds.child("email").getValue();
+                            String shopName = ""+ds.child("shopName").getValue();
+                            String imageProfile = ""+ ds.child("imageProfile").getValue();
                             binding.fullNameTv.setText(fullName);
+                            binding.emailTv.setText(email);
+                            binding.shopNameTv.setText(shopName);
+
+                            Glide.with(MainSellerActivity.this).load(imageProfile).placeholder(R.drawable.baseline_account_circle_24).into(binding.imageProfile);
                         }
 
                     }
