@@ -11,5 +11,8 @@
     <color name="gray01">#919190</color>
     <color name="gray02">#D6D6D2</color>
     <color name="red">#E81C1C</color>
+    <color name="red_transparent">#1EF44336</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="orange">#FF9800</color>
+    <color name="orange_transparent">#37FF9800</color>
 </resources>

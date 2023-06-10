@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.grocery_app.databinding.ActivityMainSellerBinding;
@@ -28,6 +30,8 @@ public class MainSellerActivity extends AppCompatActivity {
     ActivityMainSellerBinding binding;
     FirebaseAuth firebaseAuth;
 
+    TextView productTv, ordersTv;
+
     private final static String TAG = "TAG_MAIN_SELLER";
 
     @Override
@@ -35,6 +39,9 @@ public class MainSellerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainSellerBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
+
+        productTv = binding.productTv;
+        ordersTv = binding.ordersTv;
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
@@ -61,6 +68,45 @@ public class MainSellerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        
+        binding.productTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProductList();
+            }
+        });
+        
+        binding.ordersTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOrdersList();
+            }
+        });
+    }
+
+    private void showOrdersList() {
+
+        binding.productListRl.setVisibility(View.GONE);
+        binding.ordersListRl.setVisibility(View.VISIBLE);
+
+        ordersTv.setBackgroundResource(R.drawable.shape_rect_04);
+        ordersTv.setTextColor(getResources().getColor(R.color.black));
+
+        productTv.setTextColor(getResources().getColor(R.color.white));
+        productTv.setBackgroundColor(getResources().getColor(R.color.transparent));
+    }
+
+    private void showProductList() {
+        binding.productListRl.setVisibility(View.VISIBLE);
+        binding.ordersListRl.setVisibility(View.GONE);
+
+        productTv.setBackgroundResource(R.drawable.shape_rect_04);
+        productTv.setTextColor(getResources().getColor(R.color.black));
+
+        ordersTv.setTextColor(getResources().getColor(R.color.white));
+        ordersTv.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+
     }
 
     private void makeOffline() {

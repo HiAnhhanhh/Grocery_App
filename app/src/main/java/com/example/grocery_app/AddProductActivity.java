@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -42,6 +43,8 @@ public class AddProductActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,8 @@ public class AddProductActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         firebaseAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Please wait");
         binding.categoryEt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,8 +125,6 @@ public class AddProductActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty(title)){
             Toast.makeText(this, "Enter Title", Toast.LENGTH_SHORT).show();
-        }if(TextUtils.isEmpty(des)){
-            Toast.makeText(this, "Enter Description", Toast.LENGTH_SHORT).show();
         }if(TextUtils.isEmpty(category)){
             Toast.makeText(this, "Pick Category ", Toast.LENGTH_SHORT).show();
         }if(TextUtils.isEmpty(price)){
@@ -143,6 +146,8 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void saveData() {
+        progressDialog.setMessage("Adding Product ...");
+        progressDialog.show();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String timestamp = String.valueOf(System.currentTimeMillis());
 
@@ -168,11 +173,15 @@ public class AddProductActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(AddProductActivity.this, "Product Added", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                            finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(AddProductActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                            finish();
                         }
                     });
 
@@ -190,6 +199,39 @@ public class AddProductActivity extends AppCompatActivity {
                             Uri downloadUri = task.getResult();
 
                             if(task.isSuccessful()){
+
+                                HashMap<String, Object > hashMap = new HashMap<>();
+                                hashMap.put("title", ""+ title);
+                                hashMap.put("description","" + des);
+                                hashMap.put("category", ""+ category);
+                                hashMap.put("price", ""+ price);
+                                hashMap.put("quantity", ""+ quantity);
+                                hashMap.put("discount", ""+ discount);
+                                hashMap.put("discountNote", ""+ discountNote);
+                                hashMap.put("timestamp", ""+ timestamp);
+                                hashMap.put("productId", ""+ timestamp);
+                                hashMap.put("uid", ""+ firebaseAuth.getUid());
+                                hashMap.put("productImage", ""+ imageUri);
+
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+
+                                ref.child(firebaseAuth.getUid()).child("Product")
+                                        .setValue(hashMap)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(AddProductActivity.this, "Product Added", Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                finish();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(AddProductActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                finish();
+                                            }
+                                        });
 
                             }
                         }

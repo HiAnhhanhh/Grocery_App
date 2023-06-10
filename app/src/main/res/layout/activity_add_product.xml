@@ -48,7 +48,7 @@
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/Circular"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/baseline_add_shopping_cart_24_gray"
+                android:src="@drawable/baseline_add_shopping_cart_24_colorprimary"
                 android:layout_height="90dp"
                 android:background="@drawable/shape_circle02"/>
 
@@ -200,6 +200,7 @@
                         android:layout_height="wrap_content">
 
                         <EditText
+                            android:visibility="gone"
                             android:id="@+id/discountPriceEt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -230,6 +231,7 @@
                             android:drawableStart="@drawable/baseline_note_24"
                             android:drawablePadding="10dp"
                             android:hint="@string/discount_note"
+                            android:visibility="gone"
                             android:inputType="text"
                             android:padding="12dp"
                             android:textColor="@color/black"

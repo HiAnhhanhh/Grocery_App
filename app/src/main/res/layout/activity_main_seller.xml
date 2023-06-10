@@ -7,24 +7,24 @@
     tools:context=".MainSellerActivity">
 
     <RelativeLayout
+        android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="140dp"
         android:background="@drawable/shape_rect01"
-        android:padding="5dp">
+        android:padding="7dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageProfile"
-            android:layout_centerVertical="true"
             android:layout_width="70dp"
             android:scaleType="centerCrop"
+            android:layout_marginBottom="5dp"
             app:shapeAppearanceOverlay="@style/Circular"
             android:layout_height="70sp"
             android:background="@drawable/shape_circle02"
             android:src="@drawable/baseline_account_circle_24"/>
 
         <LinearLayout
-            android:layout_centerVertical="true"
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_toEndOf="@id/imageProfile"
@@ -32,7 +32,7 @@
 
             <TextView
                 android:id="@+id/fullNameTv"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="@string/full_name"
                 android:textSize="16sp"
@@ -43,7 +43,7 @@
 
             <TextView
                 android:id="@+id/shopNameTv"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="@string/shop_name"
                 android:textSize="16sp"
@@ -55,7 +55,7 @@
             <TextView
                 android:id="@+id/emailTv"
                 android:maxLines="1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
                 android:textSize="16sp"
@@ -70,28 +70,90 @@
 
         <ImageButton
             android:id="@+id/logoutBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@color/transparent"
             android:layout_alignParentEnd="true"
             android:src="@drawable/baseline_logout_24"/>
 
         <ImageButton
             android:id="@+id/editBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_toStartOf="@id/logoutBtn"
             android:background="@color/transparent"
             android:src="@drawable/baseline_edit_24"/>
 
         <ImageButton
             android:id="@+id/addProductBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_toStartOf="@id/editBtn"
             android:background="@color/transparent"
-            android:src="@drawable/baseline_add_shopping_cart_24_gray"/>
+            android:src="@drawable/baseline_add_shopping_cart_24_white"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_rect_04_gray"
+            android:layout_below="@id/imageProfile">
+
+            <TextView
+                android:id="@+id/productTv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="@string/product"
+                android:background="@drawable/shape_rect_04"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/ordersTv"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:text="@string/orders"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
     </RelativeLayout>
+
+    <EditText
+        android:id="@+id/searchEt"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/toolbarRl"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_rect02"
+        android:drawableStart="@drawable/baseline_search_24"
+        android:drawablePadding="5dp"
+        android:hint="@string/search"
+        android:textColorHint="@color/gray01"/>
+
+    <RelativeLayout
+        android:id="@+id/productListRl"
+        android:layout_below="@id/searchEt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ordersListRl"
+        android:layout_below="@id/searchEt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 </RelativeLayout>

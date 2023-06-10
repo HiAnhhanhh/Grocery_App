@@ -36,4 +36,10 @@
     <string name="quantity">Quantity</string>
     <string name="discount_price">Discount Price</string>
     <string name="discount_note">Discount Note</string>
+    <string name="product">Products</string>
+    <string name="orders">Orders</string>
+    <string name="search">Search ...</string>
+    <string name="_10_off">10% off</string>
+    <string name="_10">$10</string>
+    <string name="_20">$20</string>
 </resources>
