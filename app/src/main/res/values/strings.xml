@@ -42,4 +42,10 @@
     <string name="_10_off">10% off</string>
     <string name="_10">$10</string>
     <string name="_20">$20</string>
+    <string name="showing_all">Showing All</string>
+    <string name="product_detail">Product Detail</string>
+    <string name="product_title">Product Title</string>
+    <string name="the_product_description">The Product Description</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="update_product">Update Product</string>
 </resources>

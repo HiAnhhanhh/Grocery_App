@@ -124,36 +124,72 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/searchEt"
+    <RelativeLayout
+        android:id="@+id/filterRl"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_below="@+id/toolbarRl"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/shape_rect02"
-        android:drawableStart="@drawable/baseline_search_24"
-        android:drawablePadding="5dp"
-        android:hint="@string/search"
-        android:textColorHint="@color/gray01"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbarRl">
+
+        <EditText
+            android:id="@+id/searchEt"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_rect02"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:drawablePadding="5dp"
+            android:hint="@string/search"
+            android:layout_toStartOf="@+id/filterBtn"
+            android:padding="10dp"
+            android:textColorHint="@color/gray01" />
+
+        <ImageButton
+            android:id="@+id/filterBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/baseline_category_24"
+            android:background="@color/transparent"
+            android:scaleType="fitXY"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:id="@+id/filteredTv"
+            android:layout_below="@id/searchEt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/showing_all"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"/>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/productListRl"
-        android:layout_below="@id/searchEt"
+        android:layout_below="@id/filterRl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/productRec"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/row_product_seller" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/ordersListRl"
-        android:layout_below="@id/searchEt"
+        android:layout_below="@id/filterRl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>

@@ -1,10 +1,15 @@
 package com.example.grocery_app;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainSellerActivity extends AppCompatActivity {
@@ -32,7 +38,11 @@ public class MainSellerActivity extends AppCompatActivity {
 
     TextView productTv, ordersTv;
 
+    private ProductAdapter productAdapter;
+    private ArrayList<ProductModels> productModelsArrayList;
+
     private final static String TAG = "TAG_MAIN_SELLER";
+    String selectedCategory = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +55,8 @@ public class MainSellerActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
+        loadAllProduct();
+
 
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +94,107 @@ public class MainSellerActivity extends AppCompatActivity {
                 showOrdersList();
             }
         });
+
+        binding.filterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainSellerActivity.this);
+                builder.setTitle("Chose Category")
+                        .setItems(Constants.optionsCategories, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        selectedCategory = Constants.optionsCategories[which];
+                        binding.filteredTv.setText(selectedCategory);
+                        if(selectedCategory.equals("All")){
+                            binding.filteredTv.setText("Showing All");
+                            loadAllProduct();
+                        }else{
+                            loadFilterList(selectedCategory);
+                        }
+                    }
+                }).show();
+            }
+        });
+
+//        binding.searchEt.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                try {
+//                    productAdapter.getFilter().filter(s);
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+    }
+
+    private void loadFilterList(String selectedCategory) {
+        productModelsArrayList= new ArrayList<>();
+        Log.d(TAG, "loadAllProduct: ok");
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Products");
+        ref.orderByChild("uid").equalTo(firebaseAuth.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        productModelsArrayList.clear();
+                        for( DataSnapshot ds : snapshot.getChildren()){
+
+                            String category =""+ ds.child("category").getValue();
+
+                            if(selectedCategory.equals(category)){
+                                ProductModels model = ds.getValue(ProductModels.class);
+                                productModelsArrayList.add(model);
+                            }
+                        }
+                        productAdapter = new ProductAdapter(MainSellerActivity.this, productModelsArrayList);
+                        binding.productRec.setLayoutManager(new LinearLayoutManager(MainSellerActivity.this));
+                        binding.productRec.setAdapter(productAdapter);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+
+    private void loadAllProduct() {
+        productModelsArrayList= new ArrayList<>();
+        Log.d(TAG, "loadAllProduct: ok");
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(""+firebaseAuth.getUid()).child("Products")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        productModelsArrayList.clear();
+                        for( DataSnapshot ds : snapshot.getChildren()){
+                            ProductModels model = ds.getValue(ProductModels.class);
+                            productModelsArrayList.add(model);
+                            Log.d(TAG, "onDataChange: "+ productModelsArrayList);
+                        }
+                        productAdapter = new ProductAdapter(MainSellerActivity.this, productModelsArrayList);
+                        binding.productRec.setLayoutManager(new LinearLayoutManager(MainSellerActivity.this));
+                        binding.productRec.setAdapter(productAdapter);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     private void showOrdersList() {
@@ -105,8 +218,6 @@ public class MainSellerActivity extends AppCompatActivity {
 
         ordersTv.setTextColor(getResources().getColor(R.color.white));
         ordersTv.setBackgroundColor(getResources().getColor(R.color.transparent));
-
-
     }
 
     private void makeOffline() {
@@ -139,14 +250,12 @@ public class MainSellerActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }else{
-            Log.d(TAG, "checkUser: ok");
             loadInfo();
         }
 
     }
 
     private void loadInfo() {
-        Log.d(TAG, "loadInfo: Success");
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.orderByChild("uid").equalTo(firebaseAuth.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {

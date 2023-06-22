@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -44,6 +45,8 @@ public class AddProductActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
 
     ProgressDialog progressDialog;
+
+    final static String TAG ="CHECK_RUN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,13 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
+        binding.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
 
     }
 
@@ -110,7 +120,7 @@ public class AddProductActivity extends AppCompatActivity {
             });
 
     String des, category, price, quantity, discount, discountNote, title;
-    boolean discountSwitch;
+    boolean discountAvailable = false;
 
     private void validate() {
 
@@ -119,33 +129,36 @@ public class AddProductActivity extends AppCompatActivity {
         price = binding.priceEt.getText().toString().trim();
         category = binding.categoryEt.getText().toString().trim();
         quantity = binding.quantityEt.getText().toString().trim();
-        discount = binding.discountPriceEt.getText().toString().trim();
-        discountNote = binding.discountNoteEt.getText().toString().trim();
-        discountSwitch = binding.discountSwitch.isChecked();
+        discountAvailable  = binding.discountSwitch.isChecked();
 
         if(TextUtils.isEmpty(title)){
             Toast.makeText(this, "Enter Title", Toast.LENGTH_SHORT).show();
+            return;
         }if(TextUtils.isEmpty(category)){
             Toast.makeText(this, "Pick Category ", Toast.LENGTH_SHORT).show();
+            return;
         }if(TextUtils.isEmpty(price)){
             Toast.makeText(this, "Enter Price", Toast.LENGTH_SHORT).show();
+            return;
         }if(TextUtils.isEmpty(quantity)){
             Toast.makeText(this, "Enter Quantity", Toast.LENGTH_SHORT).show();
-        }if(discountSwitch){
+            return;
+        }if(discountAvailable){
+            Log.d(TAG, "validate: Check Ok");
+            discount = binding.discountPriceEt.getText().toString().trim();
+            discountNote = binding.discountNoteEt.getText().toString().trim();
             if (TextUtils.isEmpty(discount)){
                 Toast.makeText(this, "Enter Discount", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                discount ="0";
-                discountNote="";
+                return;
             }
         }else{
-            saveData();
+            discount="0";
+            discountNote="";
         }
-
+        addProduct();
     }
 
-    private void saveData() {
+    private void addProduct() {
         progressDialog.setMessage("Adding Product ...");
         progressDialog.show();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -156,10 +169,11 @@ public class AddProductActivity extends AppCompatActivity {
             hashMap.put("title", ""+ title);
             hashMap.put("description","" + des);
             hashMap.put("category", ""+ category);
-            hashMap.put("price", ""+ price);
+            hashMap.put("originalPrice", ""+ price);
             hashMap.put("quantity", ""+ quantity);
-            hashMap.put("discount", ""+ discount);
-            hashMap.put("discountNote", ""+ discountNote);
+            hashMap.put("discountedPrice", ""+ discount);
+            hashMap.put("discountedNote", ""+ discountNote);
+            hashMap.put("discountAvailable",""+discountAvailable);
             hashMap.put("timestamp", ""+ timestamp);
             hashMap.put("productId", ""+ timestamp);
             hashMap.put("uid", ""+ firebaseAuth.getUid());
@@ -167,14 +181,14 @@ public class AddProductActivity extends AppCompatActivity {
 
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
 
-            ref.child(firebaseAuth.getUid()).child("Product")
+            ref.child(""+firebaseAuth.getUid()).child("Products").child(timestamp)
                     .setValue(hashMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(AddProductActivity.this, "Product Added", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
-                            finish();
+                            clearData();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -204,25 +218,26 @@ public class AddProductActivity extends AppCompatActivity {
                                 hashMap.put("title", ""+ title);
                                 hashMap.put("description","" + des);
                                 hashMap.put("category", ""+ category);
-                                hashMap.put("price", ""+ price);
+                                hashMap.put("originalPrice", ""+ price);
                                 hashMap.put("quantity", ""+ quantity);
-                                hashMap.put("discount", ""+ discount);
-                                hashMap.put("discountNote", ""+ discountNote);
+                                hashMap.put("discountedPrice", ""+ discount);
+                                hashMap.put("discountAvailable", ""+ discountAvailable);
+                                hashMap.put("discountedNote", ""+ discountNote);
                                 hashMap.put("timestamp", ""+ timestamp);
                                 hashMap.put("productId", ""+ timestamp);
                                 hashMap.put("uid", ""+ firebaseAuth.getUid());
-                                hashMap.put("productImage", ""+ imageUri);
+                                hashMap.put("productImage", ""+ downloadUri);
 
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
 
-                                ref.child(firebaseAuth.getUid()).child("Product")
+                                ref.child(""+firebaseAuth.getUid()).child("Products").child(timestamp)
                                         .setValue(hashMap)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
                                                 Toast.makeText(AddProductActivity.this, "Product Added", Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
-                                                finish();
+                                                clearData();
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
@@ -238,6 +253,18 @@ public class AddProductActivity extends AppCompatActivity {
                     });
         }
 
+    }
+
+    private void clearData() {
+        binding.titleEt.setText("");
+        binding.descriptionEt.setText("");
+        binding.categoryEt.setText("");
+        binding.discountPriceEt.setText("");
+        binding.priceEt.setText("");
+        binding.discountNoteEt.setText("");
+        binding.quantityEt.setText("");
+        binding.productImageImv.setImageResource(R.drawable.baseline_add_shopping_cart_24_colorprimary);
+        imageUri = null;
     }
 
     String selectedCategory= "";
