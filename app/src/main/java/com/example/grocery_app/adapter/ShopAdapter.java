@@ -1,4 +1,4 @@
-package com.example.grocery_app;
+package com.example.grocery_app.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.grocery_app.R;
+import com.example.grocery_app.activities.ShopDetailsActivity;
 import com.example.grocery_app.databinding.RowShopBinding;
+import com.example.grocery_app.models.ShopModels;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;

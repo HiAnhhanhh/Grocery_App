@@ -1,4 +1,4 @@
-package com.example.grocery_app;
+package com.example.grocery_app.models;
 
 public class ShopModels {
 

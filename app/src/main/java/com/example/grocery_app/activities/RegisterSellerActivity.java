@@ -1,6 +1,4 @@
-package com.example.grocery_app;
-
-import static android.content.ContentValues.TAG;
+package com.example.grocery_app.activities;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -24,7 +22,6 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.grocery_app.databinding.ActivityRegisterSellerBinding;
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

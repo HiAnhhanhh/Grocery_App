@@ -1,4 +1,4 @@
-package com.example.grocery_app;
+package com.example.grocery_app.activities;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -20,7 +20,8 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.grocery_app.databinding.ActivityEditProfileUserBinding;
+import com.example.grocery_app.R;
+import com.example.grocery_app.databinding.ActivityEditProfileSellerBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -37,10 +38,9 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 
-public class EditProfileUserActivity extends AppCompatActivity {
+public class EditProfileSellerActivity extends AppCompatActivity {
 
-    ActivityEditProfileUserBinding binding;
-
+    ActivityEditProfileSellerBinding binding;
     private FirebaseAuth firebaseAuth;
 
     private String imageUri = null;
@@ -50,7 +50,7 @@ public class EditProfileUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityEditProfileUserBinding.inflate(LayoutInflater.from(this));
+        binding = ActivityEditProfileSellerBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -80,20 +80,28 @@ public class EditProfileUserActivity extends AppCompatActivity {
             }
         });
 
-    }
-    String  fullName, phone, country, state, city, address;
 
+    }
+
+    String  fullName,shopName, phone, country, state, city, address, deliveryFee;
+    boolean shopOpen;
     private void validate() {
         fullName = binding.fullNameEt.getText().toString().trim();
+        shopName = binding.shopEt.getText().toString().trim();
         phone = binding.phoneEt.getText().toString().trim();
         city = binding.cityEt.getText().toString().trim();
         country = binding.countryEt.getText().toString().trim();
         state = binding.stateEt.getText().toString().trim();
         address = binding.addressEt.getText().toString().trim();
+        deliveryFee = binding.deliveryFeeEt.getText().toString().trim();
+        shopOpen = binding.shopOpenSwitch.isChecked();
 
 
         if(TextUtils.isEmpty(fullName)){
             Toast.makeText(this, "Enter Full Name", Toast.LENGTH_SHORT).show();
+            return;
+        } if (TextUtils.isEmpty(shopName)) {
+            Toast.makeText(this, "Enter Shop Name", Toast.LENGTH_SHORT).show();
             return;
         }if (TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "Enter Phone", Toast.LENGTH_SHORT).show();
@@ -106,6 +114,9 @@ public class EditProfileUserActivity extends AppCompatActivity {
             return;
         }if (TextUtils.isEmpty(country)) {
             Toast.makeText(this, "Enter country", Toast.LENGTH_SHORT).show();
+            return;
+        }if (TextUtils.isEmpty(deliveryFee)) {
+            Toast.makeText(this, "Enter Delivery Fee", Toast.LENGTH_SHORT).show();
             return;
         }else{
             updateProfile();
@@ -126,13 +137,16 @@ public class EditProfileUserActivity extends AppCompatActivity {
             hashMap.put("state",""+state);
             hashMap.put("city", ""+city);
             hashMap.put("address", ""+ address);
+            hashMap.put("shopName", ""+ shopName);
+            hashMap.put("deliveryFee", ""+ deliveryFee);
+            hashMap.put("shopOpen",""+ shopOpen);
 
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
             ref.child(uid).updateChildren(hashMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Intent intent = new Intent(EditProfileUserActivity.this, MainSellerActivity.class);
+                            Intent intent = new Intent(EditProfileSellerActivity.this, MainSellerActivity.class);
                             startActivity(intent);
                             progressDialog.dismiss();
                             finish();
@@ -140,7 +154,7 @@ public class EditProfileUserActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(EditProfileUserActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditProfileSellerActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                             finish();
                         }
@@ -166,6 +180,9 @@ public class EditProfileUserActivity extends AppCompatActivity {
                                 hashMap.put("state",""+state);
                                 hashMap.put("city", ""+city);
                                 hashMap.put("address", ""+ address);
+                                hashMap.put("shopName", ""+ shopName);
+                                hashMap.put("deliveryFee", ""+ deliveryFee);
+                                hashMap.put("shopOpen",""+ shopOpen);
                                 hashMap.put("imageProfile",""+ downloadImageUri); //url of upload Image
 
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
@@ -173,7 +190,7 @@ public class EditProfileUserActivity extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                Intent intent = new Intent(EditProfileUserActivity.this, MainSellerActivity.class);
+                                                Intent intent = new Intent(EditProfileSellerActivity.this, MainSellerActivity.class);
                                                 startActivity(intent);
                                                 progressDialog.dismiss();
                                                 finish();
@@ -181,12 +198,13 @@ public class EditProfileUserActivity extends AppCompatActivity {
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(EditProfileUserActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(EditProfileSellerActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
                                                 finish();
                                             }
                                         });
                             }
+
                         }
                     });
 
@@ -274,14 +292,21 @@ public class EditProfileUserActivity extends AppCompatActivity {
 
                             binding.fullNameEt.setText(fullName);
                             binding.phoneEt.setText(phone);
+                            binding.shopEt.setText(shopName);
                             binding.addressEt.setText(address);
                             binding.cityEt.setText(city);
                             binding.countryEt.setText(country);
                             binding.stateEt.setText(state);
+                            binding.deliveryFeeEt.setText(deliveryFee);
 
 
+                            if(shopOpen.equals("true")){
+                                binding.shopOpenSwitch.setChecked(true);
+                            }else{
+                                binding.shopOpenSwitch.setChecked(false);
+                            }
 
-                            Glide.with(EditProfileUserActivity.this).load(profileImage).placeholder(R.drawable.baseline_account_circle_24).into(binding.editProfileImv);
+                            Glide.with(EditProfileSellerActivity.this).load(profileImage).placeholder(R.drawable.baseline_account_circle_24).into(binding.editProfileImv);
 
 
                         }

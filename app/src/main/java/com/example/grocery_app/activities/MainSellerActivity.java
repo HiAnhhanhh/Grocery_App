@@ -1,4 +1,4 @@
-package com.example.grocery_app;
+package com.example.grocery_app.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -8,15 +8,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.grocery_app.Constants;
+import com.example.grocery_app.adapter.ProductAdapter;
+import com.example.grocery_app.R;
 import com.example.grocery_app.databinding.ActivityMainSellerBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,7 +39,7 @@ public class MainSellerActivity extends AppCompatActivity {
     TextView productTv, ordersTv;
 
     private ProductAdapter productAdapter;
-    private ArrayList<ProductModels> productModelsArrayList;
+    private ArrayList<Constants.ProductModels> productModelsArrayList;
 
     private final static String TAG = "TAG_MAIN_SELLER";
     String selectedCategory = "";
@@ -153,7 +153,7 @@ public class MainSellerActivity extends AppCompatActivity {
                             String category =""+ ds.child("category").getValue();
 
                             if(selectedCategory.equals(category)){
-                                ProductModels model = ds.getValue(ProductModels.class);
+                                Constants.ProductModels model = ds.getValue(Constants.ProductModels.class);
                                 productModelsArrayList.add(model);
                             }
                         }
@@ -181,7 +181,7 @@ public class MainSellerActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         productModelsArrayList.clear();
                         for( DataSnapshot ds : snapshot.getChildren()){
-                            ProductModels model = ds.getValue(ProductModels.class);
+                            Constants.ProductModels model = ds.getValue(Constants.ProductModels.class);
                             productModelsArrayList.add(model);
                             Log.d(TAG, "onDataChange: "+ productModelsArrayList);
                         }

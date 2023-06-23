@@ -50,4 +50,5 @@
     <string name="update_product">Update Product</string>
     <string name="closed">Closed</string>
     <string name="shop_details">Shop Details</string>
+    <string name="add_to_cart">Add To Cart</string>
 </resources>

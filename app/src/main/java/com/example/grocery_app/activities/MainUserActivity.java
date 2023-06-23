@@ -1,4 +1,4 @@
-package com.example.grocery_app;
+package com.example.grocery_app.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,14 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.grocery_app.R;
+import com.example.grocery_app.adapter.ShopAdapter;
 import com.example.grocery_app.databinding.ActivityMainUserBinding;
+import com.example.grocery_app.models.ShopModels;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

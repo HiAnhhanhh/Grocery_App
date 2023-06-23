@@ -1,6 +1,4 @@
-package com.example.grocery_app;
-
-import static androidx.constraintlayout.motion.widget.TransitionBuilder.validate;
+package com.example.grocery_app.activities;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -10,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +20,8 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import com.example.grocery_app.Constants;
+import com.example.grocery_app.R;
 import com.example.grocery_app.databinding.ActivityAddProductBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

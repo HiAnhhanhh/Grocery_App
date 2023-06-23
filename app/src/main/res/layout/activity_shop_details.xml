@@ -4,14 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShopDetailsActivity">
+    tools:context=".activities.ShopDetailsActivity">
+
 
     
     <RelativeLayout
         android:id="@+id/shopRl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_01">
+        android:layout_height="220dp">
+
+        <ImageView
+            android:id="@+id/shopImv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@color/black_transparent"/>
 
         <LinearLayout
             android:padding="10dp"
@@ -57,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/address"
-            android:padding="5dp"
+            android:paddingStart="10dp"
             android:layout_below="@+id/listLl"
             android:textColor="@color/white"
             android:maxLines="2"
@@ -73,6 +84,7 @@
             android:layout_alignParentEnd="true">
 
             <TextView
+                android:id="@+id/openTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/open"
@@ -82,6 +94,7 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/deliveryFeeTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/delivery_fee"
@@ -93,7 +106,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/addressTv"
+            android:layout_alignParentBottom="true"
             android:padding="5dp"
             android:gravity="center_horizontal">
 
@@ -195,7 +208,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/productRec"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/row_product_user"/>
 
 
     </RelativeLayout>

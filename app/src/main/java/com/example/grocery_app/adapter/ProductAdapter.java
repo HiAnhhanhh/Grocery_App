@@ -1,4 +1,4 @@
-package com.example.grocery_app;
+package com.example.grocery_app.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -9,30 +9,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.grocery_app.Constants;
+import com.example.grocery_app.R;
+import com.example.grocery_app.activities.EditProductActivity;
 import com.example.grocery_app.databinding.ActivityProductDetailsSellerBinding;
 import com.example.grocery_app.databinding.RowProductSellerBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.concurrent.BlockingDeque;
 
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
@@ -42,10 +38,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     final  static  String TAG ="TAG_IMAGE";
 
     Context context;
-    public ArrayList<ProductModels> productModelsArrayList, filterList;
+    public ArrayList<Constants.ProductModels> productModelsArrayList, filterList;
 //    private FilterProduct filterProduct;
 
-    public ProductAdapter(Context context, ArrayList<ProductModels> productModelsArrayList) {
+    public ProductAdapter(Context context, ArrayList<Constants.ProductModels> productModelsArrayList) {
         this.context = context;
         this.productModelsArrayList = productModelsArrayList;
 //        this.filterList = productModelsArrayList;
@@ -60,7 +56,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final ProductModels model = productModelsArrayList.get(position);
+        final Constants.ProductModels model = productModelsArrayList.get(position);
         String discountAvailable = model.getDiscountAvailable();
         String quantity = model.getQuantity();
         String discountedPrice = model.getDiscountedPrice();
@@ -101,7 +97,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     }
 
-    private void detailsBottomSheet(ProductModels model) {
+    private void detailsBottomSheet(Constants.ProductModels model) {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         bindingBottomSheet = ActivityProductDetailsSellerBinding.inflate(LayoutInflater.from(context));
         bottomSheetDialog.setContentView(bindingBottomSheet.getRoot());
@@ -153,7 +149,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         bindingBottomSheet.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,EditProductActivity.class);
+                Intent intent = new Intent(context, EditProductActivity.class);
                 intent.putExtra("productId", productId);
                 context.startActivity(intent);
             }
