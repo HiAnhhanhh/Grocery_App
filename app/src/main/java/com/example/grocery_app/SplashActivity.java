@@ -52,18 +52,18 @@ public class SplashActivity extends AppCompatActivity {
 
     private void checkUserType() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
-        ref.child(firebaseAuth.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.orderByChild("uid").equalTo(""+firebaseAuth.getUid())
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             String userType = "" + ds.child("userType").getValue();
-                            if (userType.equals("User")) {
-                                Intent intent = new Intent(SplashActivity.this, MainUserActivity.class);
-                                startActivity(intent);
-                            } else {
+                            if (userType.equals("Seller")) {
                                 Intent intent = new Intent(SplashActivity.this, MainSellerActivity.class);
                                 startActivity(intent);
+                            } else  {
+                                Intent intent1 = new Intent(SplashActivity.this, MainUserActivity.class);
+                                startActivity(intent1);
                             }
                         }
                     }

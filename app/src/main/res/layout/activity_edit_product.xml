@@ -249,7 +249,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_marginTop="5dp"
-                android:id="@+id/addProductBtn"
+                android:id="@+id/updateProductBtn"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/registerSv"

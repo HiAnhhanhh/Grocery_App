@@ -165,11 +165,11 @@ public class RegisterUserActivity extends AppCompatActivity {
             hashMap.put("timestamp",""+ timestamp);
             hashMap.put("country",""+ country);
             hashMap.put("state",""+state);
+            hashMap.put("phone",""+ phone);
             hashMap.put("city", ""+city);
             hashMap.put("address", ""+ address);
             hashMap.put("userType", "User");
             hashMap.put("online", "true");
-            hashMap.put("shopOpen","open");
             hashMap.put("imageProfile","");
 
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
@@ -180,7 +180,6 @@ public class RegisterUserActivity extends AppCompatActivity {
                             Intent intent = new Intent(RegisterUserActivity.this, LoginActivity.class);
                             startActivity(intent);
                             progressDialog.dismiss();
-                            finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -209,13 +208,13 @@ public class RegisterUserActivity extends AppCompatActivity {
                                 hashMap.put("email",""+email);
                                 hashMap.put("uid",""+uid);
                                 hashMap.put("timestamp",""+ timestamp);
+                                hashMap.put("phone",""+ phone);
                                 hashMap.put("country",""+ country);
                                 hashMap.put("state",""+state);
                                 hashMap.put("city", ""+city);
                                 hashMap.put("address", ""+ address);
-                                hashMap.put("userType", "Seller");
+                                hashMap.put("userType", "User");
                                 hashMap.put("online", "true");
-                                hashMap.put("shopOpen","open");
                                 hashMap.put("imageProfile",""+ downloadImageUri); //url of upload Image
 
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
@@ -226,14 +225,12 @@ public class RegisterUserActivity extends AppCompatActivity {
                                                 Intent intent = new Intent(RegisterUserActivity.this, LoginActivity.class);
                                                 startActivity(intent);
                                                 progressDialog.dismiss();
-                                                finish();
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Toast.makeText(RegisterUserActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
-                                                finish();
                                             }
                                         });
                             }

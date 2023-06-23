@@ -48,4 +48,6 @@
     <string name="the_product_description">The Product Description</string>
     <string name="edit_product">Edit Product</string>
     <string name="update_product">Update Product</string>
+    <string name="closed">Closed</string>
+    <string name="shop_details">Shop Details</string>
 </resources>
