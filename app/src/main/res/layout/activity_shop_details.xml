@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ShopDetailsActivity">
-
-
     
     <RelativeLayout
         android:id="@+id/shopRl"
@@ -130,9 +128,17 @@
     <RelativeLayout
         android:id="@+id/toolBarRl"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:background="@drawable/shape_rect01"
         android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/orderDetailsImB"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/baseline_add_shopping_cart_24_white"
+            android:background="@color/transparent"
+            android:layout_alignParentEnd="true"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -206,9 +212,8 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/productRec"
+            android:id="@+id/productUserRec"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             tools:listitem="@layout/row_product_user"/>
 

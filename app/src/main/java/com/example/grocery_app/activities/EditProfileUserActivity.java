@@ -133,17 +133,13 @@ public class EditProfileUserActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Intent intent = new Intent(EditProfileUserActivity.this, MainSellerActivity.class);
-                            startActivity(intent);
                             progressDialog.dismiss();
-                            finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(EditProfileUserActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
-                            finish();
                         }
                     });
         }else{

@@ -182,6 +182,16 @@
         android:layout_below="@id/filterRl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orderRec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/row_user_order_item"/>
+
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -6,14 +6,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.grocery_app.R;
+import com.example.grocery_app.adapter.OrderUserAdapter;
 import com.example.grocery_app.adapter.ShopAdapter;
 import com.example.grocery_app.databinding.ActivityMainUserBinding;
+import com.example.grocery_app.models.OrderUserModels;
 import com.example.grocery_app.models.ShopModels;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,6 +42,9 @@ public class MainUserActivity extends AppCompatActivity {
 
     private ArrayList<ShopModels> shopModelsArrayList;
     private ShopAdapter adapter;
+
+    private ArrayList<OrderUserModels> orderUserList;
+    private OrderUserAdapter adapter1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +127,47 @@ public class MainUserActivity extends AppCompatActivity {
 
         productTv.setTextColor(getResources().getColor(R.color.white));
         productTv.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+        loadOrderInfo();
+    }
+
+    private void loadOrderInfo() {
+        orderUserList = new ArrayList<>();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()){
+                    String uId = ds.getRef().getKey();
+                    DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Orders");
+                    ref1.child(uId).orderByChild("orderBy").equalTo(""+ firebaseAuth.getUid())
+                            .addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if(snapshot.exists()){
+                                        for(DataSnapshot ds : snapshot.getChildren()){
+                                            OrderUserModels model = ds.getValue(OrderUserModels.class);
+                                            orderUserList.add(model);
+                                        }
+                                        adapter1 = new OrderUserAdapter(MainUserActivity.this,orderUserList);
+                                        binding.orderRec.setLayoutManager(new LinearLayoutManager(MainUserActivity.this));
+                                        binding.orderRec.setAdapter(adapter1);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void showProductList() {

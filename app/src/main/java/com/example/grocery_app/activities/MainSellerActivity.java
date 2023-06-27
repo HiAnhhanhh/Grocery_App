@@ -54,6 +54,7 @@ public class MainSellerActivity extends AppCompatActivity {
         ordersTv = binding.ordersTv;
 
         firebaseAuth = FirebaseAuth.getInstance();
+        loadInfo();
         checkUser();
         loadAllProduct();
 

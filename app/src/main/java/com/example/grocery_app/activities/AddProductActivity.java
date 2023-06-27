@@ -93,10 +93,9 @@ public class AddProductActivity extends AppCompatActivity {
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                startActivity(new Intent(AddProductActivity.this,MainSellerActivity.class));
             }
         });
-
 
     }
 
@@ -129,7 +128,6 @@ public class AddProductActivity extends AppCompatActivity {
         category = binding.categoryEt.getText().toString().trim();
         quantity = binding.quantityEt.getText().toString().trim();
         discountAvailable  = binding.discountSwitch.isChecked();
-
         if(TextUtils.isEmpty(title)){
             Toast.makeText(this, "Enter Title", Toast.LENGTH_SHORT).show();
             return;
@@ -188,18 +186,18 @@ public class AddProductActivity extends AppCompatActivity {
                             Toast.makeText(AddProductActivity.this, "Product Added", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                             clearData();
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(AddProductActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
-                            finish();
                         }
                     });
 
         }else{
-            String filePathName = "product_image/"+ ""+firebaseAuth.getUid();
+            String filePathName = "product_image/"+ ""+timestamp;
 
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathName);
 
@@ -243,7 +241,6 @@ public class AddProductActivity extends AppCompatActivity {
                                             public void onFailure(@NonNull Exception e) {
                                                 Toast.makeText(AddProductActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
-                                                finish();
                                             }
                                         });
 
@@ -279,6 +276,5 @@ public class AddProductActivity extends AppCompatActivity {
                     }
                 })
                 .show();
-
     }
 }

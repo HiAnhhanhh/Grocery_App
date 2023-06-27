@@ -38,6 +38,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     final  static  String TAG ="TAG_IMAGE";
 
     Context context;
+
+    FirebaseAuth firebaseAuth;
     public ArrayList<Constants.ProductModels> productModelsArrayList, filterList;
 //    private FilterProduct filterProduct;
 
@@ -164,7 +166,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                         .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                deleteProduct(productId);
+                                deleteProduct(productId, bottomSheetDialog);
                             }
                         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
@@ -177,9 +179,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         });
     }
 
-    private void deleteProduct(String productId) {
-
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private void deleteProduct(String productId, BottomSheetDialog bottomSheetDialog) {
+        firebaseAuth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.child(""+firebaseAuth.getUid()).child("Products").child(productId)
                 .removeValue()
@@ -187,6 +188,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(context, "Product deleted...", Toast.LENGTH_SHORT).show();
+                        bottomSheetDialog.dismiss();
                     }
                 });
     }

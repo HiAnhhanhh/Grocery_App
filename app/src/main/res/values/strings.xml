@@ -51,4 +51,19 @@
     <string name="closed">Closed</string>
     <string name="shop_details">Shop Details</string>
     <string name="add_to_cart">Add To Cart</string>
+    <string name="finalPrice">finalPrice</string>
+    <string name="_1">1</string>
+    <string name="_0_0">0.0</string>
+    <string name="order_to">Order to</string>
+    <string name="sub_total">Sub Total :</string>
+    <string name="delivery_fee_1">Delivery Fee :</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="_10_kg">10/KG</string>
+    <string name="_2">[2]</string>
+    <string name="remove">Remove</string>
+    <string name="order_12345">Order : 12345</string>
+    <string name="_27_06_2001">27/06/2001</string>
+    <string name="hi_anhhanhh">Hi_Anhhanhh</string>
+    <string name="in_process">In Process</string>
+    <string name="total_amount_500">Total Amount : $500</string>
 </resources>

@@ -175,7 +175,6 @@ public class EditProductActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(EditProductActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
-                            finish();
                         }
                     });
 
@@ -220,7 +219,6 @@ public class EditProductActivity extends AppCompatActivity {
                                             public void onFailure(@NonNull Exception e) {
                                                 Toast.makeText(EditProductActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
-                                                finish();
                                             }
                                         });
 
@@ -233,7 +231,7 @@ public class EditProductActivity extends AppCompatActivity {
     private void loadDetailProduct() {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
-        ref.child(firebaseAuth.getUid()).child("Products")
+        ref.child(""+firebaseAuth.getUid()).child("Products")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
