@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -54,9 +55,10 @@ public class ShopDetailsActivity extends AppCompatActivity {
     private CartItemAdapter adapter1;
     private ProductUserAdapter adapter;
 
-    String deliveryFee;
-    String shopName;
+    private String deliveryFee;
+    private String shopName;
 
+    private String address;
 
     String shopUid;
     @Override
@@ -77,7 +79,7 @@ public class ShopDetailsActivity extends AppCompatActivity {
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                startActivity(new Intent(ShopDetailsActivity.this, MainUserActivity.class));
             }
         });
 
@@ -208,6 +210,8 @@ public class ShopDetailsActivity extends AppCompatActivity {
         hashMap.put("orderTo",""+ shopUid);
         hashMap.put("orderBy",""+ firebaseAuth.getUid());
         hashMap.put("orderCost",cost);
+        hashMap.put("orderByShop", shopName);
+        hashMap.put("shopAddress", address);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Orders").child(""+ shopUid).child(""+timestamp1);
         ref
@@ -221,6 +225,7 @@ public class ShopDetailsActivity extends AppCompatActivity {
                             String name = cartItemModelsArrayList.get(i).getItemName();
                             String cost = cartItemModelsArrayList.get(i).getItemPrice();
                             String price = cartItemModelsArrayList.get(i).getItemPriceEach();
+                            String unit = cartItemModelsArrayList.get(i).getUnit();
 
 
                             HashMap<String, String> hashMap1 = new HashMap<>();
@@ -229,6 +234,7 @@ public class ShopDetailsActivity extends AppCompatActivity {
                             hashMap1.put("quantity", quantity);
                             hashMap1.put("cost",cost);
                             hashMap1.put("price",price);
+                            hashMap1.put("unit",unit);
 
                             ref.child("Items").child(productId).setValue(hashMap1);
                         }
@@ -277,7 +283,7 @@ public class ShopDetailsActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String address = ""+ snapshot.child("address").getValue();
+                            address = ""+ snapshot.child("address").getValue();
                             String phone = ""+ snapshot.child("phone").getValue();
                             String email = ""+ snapshot.child("email").getValue();
                             String open = ""+snapshot.child("open").getValue();

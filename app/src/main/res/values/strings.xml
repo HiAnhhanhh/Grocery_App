@@ -66,4 +66,6 @@
     <string name="hi_anhhanhh">Hi_Anhhanhh</string>
     <string name="in_process">In Process</string>
     <string name="total_amount_500">Total Amount : $500</string>
+    <string name="order_details">Order Details</string>
+    <string name="orderid">OrderId :</string>
 </resources>

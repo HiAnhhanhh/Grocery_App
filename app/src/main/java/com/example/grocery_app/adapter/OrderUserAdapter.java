@@ -1,6 +1,7 @@
 package com.example.grocery_app.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery_app.R;
+import com.example.grocery_app.activities.OrderDetailsUsersActivity;
 import com.example.grocery_app.databinding.RowUserOrderItemBinding;
 import com.example.grocery_app.models.OrderUserModels;
 import com.google.firebase.database.DataSnapshot;
@@ -69,12 +71,22 @@ public class OrderUserAdapter extends RecyclerView.Adapter<OrderUserAdapter.View
         String date = DateFormat.format("dd/MM/yy",cal).toString();
 
         holder.dateTv.setText(date);
-        holder.amountTv.setText(orderCost);
+        holder.amountTv.setText("$"+orderCost);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, OrderDetailsUsersActivity.class);
+                intent.putExtra("orderId",orderId);
+                intent.putExtra("orderTo", orderTo);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void loadShopInfo(OrderUserModels models, ViewHolder holder) {
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.child(""+models.getOrderTo())
                 .addValueEventListener(new ValueEventListener() {
                     @Override

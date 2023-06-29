@@ -170,10 +170,9 @@ public class EditProfileUserActivity extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                Intent intent = new Intent(EditProfileUserActivity.this, MainSellerActivity.class);
+                                                Intent intent = new Intent(EditProfileUserActivity.this, MainUserActivity.class);
                                                 startActivity(intent);
                                                 progressDialog.dismiss();
-                                                finish();
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override

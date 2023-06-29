@@ -27,9 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import p32929.androideasysql_library.Column;
-import p32929.androideasysql_library.EasyDB;
-
 public class ProductUserAdapter extends RecyclerView.Adapter<ProductUserAdapter.ViewHolder> {
 
     private RowProductUserBinding binding;
@@ -56,7 +53,7 @@ public class ProductUserAdapter extends RecyclerView.Adapter<ProductUserAdapter.
     public void onBindViewHolder(@NonNull ProductUserAdapter.ViewHolder holder, int position) {
             ProductUserModels models = productUserModelsArrayList.get(position);
 
-            String title = models.getCategory();
+            String title = models.getTitle();
             String des = models.getDescription();
             String originalPrice = models.getOriginalPrice();
             String discountedPrice = models.getDiscountedPrice();
@@ -104,7 +101,7 @@ public class ProductUserAdapter extends RecyclerView.Adapter<ProductUserAdapter.
         AlertDialog.Builder quantityDialog =  new AlertDialog.Builder(context);
         quantityDialog.setView(quantityBinding.getRoot());
 
-        String title = models.getCategory();
+        String title = models.getTitle();
         String des = models.getDescription();
         String originalPrice = models.getOriginalPrice();
         String discountedPrice = models.getDiscountedPrice();
@@ -120,7 +117,11 @@ public class ProductUserAdapter extends RecyclerView.Adapter<ProductUserAdapter.
         quantityBinding.originalPriceTv.setText("$"+originalPrice);
         quantityBinding.discountedPriceTv.setText("$"+discountedPrice);
         quantityBinding.discountedNoteTv.setText("$"+ discountedNote);
-        quantityBinding.finalPriceTv.setText("$"+originalPrice);
+        if(discountAvailable.equals("true")){
+            quantityBinding.finalPriceTv.setText("$"+discountedPrice);
+        }else{
+            quantityBinding.finalPriceTv.setText("$"+originalPrice);
+        }
 
         try{
             Glide.with(context).load(imageProduct).placeholder(R.drawable.baseline_add_shopping_cart_24_white).into(quantityBinding.imageProductSiv);
@@ -176,15 +177,16 @@ public class ProductUserAdapter extends RecyclerView.Adapter<ProductUserAdapter.
                 String quantity = quantityBinding.countTv.getText().toString().trim();
                 String priceEach = quantityBinding.originalPriceTv.getText().toString().trim().replace("$","");
                 String price = quantityBinding.finalPriceTv.getText().toString().trim().replace("S","");
+                String unit = quantityBinding.quantityTv.getText().toString().trim();
 
-                addToCart(productId,title,quantity,priceEach,price);
+                addToCart(productId,title,quantity,priceEach,price, unit);
                 dialog.dismiss();
             }
         });
 
     }
 
-    private void addToCart(String productId, String title, String quantity, String priceEach, String price) {
+    private void addToCart(String productId, String title, String quantity, String priceEach, String price, String unit) {
 //        EasyDB easyDB = EasyDB.init(context,"ITEM_DB")
 //                .setTableName("ITEM_TABLE")
 //                .addColumn(new Column("Item_Id", new String[]{"text","unique"}))
@@ -214,6 +216,7 @@ public class ProductUserAdapter extends RecyclerView.Adapter<ProductUserAdapter.
         hashMap.put("itemQuantity", quantity);
         hashMap.put("itemProductId", productId);
         hashMap.put("timestamp", timestamp);
+        hashMap.put("unit", unit);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("AddToCart");
         ref.child(""+ firebaseAuth.getUid()).child(itemId).setValue(hashMap)

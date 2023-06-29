@@ -2,20 +2,9 @@ package com.example.grocery_app.models;
 
 public class CartItemModels {
 
-    String itemName, itemPrice, itemPriceEach, itemProductId, itemQuantity, timestamp, itemId;
+    String itemName, itemPrice, itemPriceEach, itemProductId, itemQuantity, timestamp, itemId, unit;
 
     public CartItemModels() {
-    }
-
-    public CartItemModels(String itemName, String itemPrice, String itemPriceEach, String itemProductId,
-                          String itemQuantity, String timestamp, String itemId) {
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.itemPriceEach = itemPriceEach;
-        this.itemProductId = itemProductId;
-        this.itemQuantity = itemQuantity;
-        this.timestamp = timestamp;
-        this.itemId = itemId;
     }
 
     public String getItemName() {
@@ -72,6 +61,29 @@ public class CartItemModels {
 
     public void setItemId(String itemId) {
         this.itemId = itemId;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public CartItemModels(String itemName, String itemPrice, String itemPriceEach,
+                          String itemProductId, String itemQuantity, String timestamp, String itemId, String unit) {
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.itemPriceEach = itemPriceEach;
+        this.itemProductId = itemProductId;
+        this.itemQuantity = itemQuantity;
+        this.timestamp = timestamp;
+        this.itemId = itemId;
+
+
+
+
     }
 }
 

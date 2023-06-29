@@ -58,11 +58,12 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         String quantity = models.getItemQuantity();
         String priceEach = models.getItemPriceEach();
         String timestamp = models.getTimestamp();
+        String unit = models.getUnit();
 
         holder.titleTv.setText(name);
         holder.priceTv.setText(price);
         holder.quantityTv.setText(" [ "+quantity+" ]");
-        holder.priceEachTv.setText("$"+priceEach);
+        holder.priceEachTv.setText("$"+priceEach + " / " + unit);
 
         holder.removeTv.setOnClickListener(new View.OnClickListener() {
             @Override

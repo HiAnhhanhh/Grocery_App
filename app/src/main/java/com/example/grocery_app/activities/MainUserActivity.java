@@ -60,6 +60,8 @@ public class MainUserActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
         loadShopInfo();
+        loadOrderInfo();
+        DeleteCart();
 
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +93,12 @@ public class MainUserActivity extends AppCompatActivity {
         });
 
     }
+
+    private void DeleteCart() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("AddToCart");
+        ref.removeValue();
+    }
+
 
     private void loadShopInfo() {
 
@@ -128,7 +136,6 @@ public class MainUserActivity extends AppCompatActivity {
         productTv.setTextColor(getResources().getColor(R.color.white));
         productTv.setBackgroundColor(getResources().getColor(R.color.transparent));
 
-        loadOrderInfo();
     }
 
     private void loadOrderInfo() {
