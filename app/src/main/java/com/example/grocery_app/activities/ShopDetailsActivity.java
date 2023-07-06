@@ -90,6 +90,15 @@ public class ShopDetailsActivity extends AppCompatActivity {
             }
         });
 
+        binding.ratingShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShopDetailsActivity.this, ShopReviewActivity.class);
+                intent.putExtra("shopUid", shopUid);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public double allTotalPrice =0.0;

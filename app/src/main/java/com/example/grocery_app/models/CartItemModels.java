@@ -82,8 +82,6 @@ public class CartItemModels {
         this.itemId = itemId;
 
 
-
-
     }
 }
 

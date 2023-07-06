@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.WriteReviewActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolBarRl"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/shape_rect01"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/write_review"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/transparent"
+            android:contentDescription="@string/back"
+            android:src="@drawable/baseline_arrow_back_ios_24" />
+    </RelativeLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/shopImageSiv"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/toolBarRl"
+        android:layout_marginTop="10dp"
+        app:shapeAppearance="@style/Circular"
+        android:background="@drawable/shape_circle02"
+        android:src="@drawable/baseline_store_24"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/shopNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/shop_name"
+        android:layout_below="@id/shopImageSiv"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/green"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/labelTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/how_was_your_experience_this_seller_n_your_feedback_is_important_to_improve_our_quantity_of_service"
+        android:layout_below="@id/shopNameTv"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"/>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelTv"
+        android:layout_centerHorizontal="true"
+        android:numStars="5"
+        />
+
+    <EditText
+        android:id="@+id/textReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingBar"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_rect02"
+        android:gravity="top"
+        android:hint="@string/type_review"
+        android:minHeight="120dp"
+        android:padding="10dp"
+        android:textColorHint="@color/gray01" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textReview"
+        android:layout_centerHorizontal="true"
+        android:background="@color/green"
+        android:text="@string/submit"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+</RelativeLayout>

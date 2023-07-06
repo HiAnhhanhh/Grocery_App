@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="3dp"
+    app:contentPadding="2dp"
+    app:cardCornerRadius="3dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/infoUserLl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profileImageSiv"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:shapeAppearance="@style/Circular"
+                android:background="@drawable/shape_circle02"
+                android:src="@drawable/baseline_account_circle_24"/>
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_marginStart="10dp">
+
+               <TextView
+                   android:id="@+id/nameTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/name"
+                   android:layout_gravity="top"
+                   android:textSize="20sp"
+                   android:textColor="@color/green"/>
+
+               <TextView
+                   android:id="@+id/dateReviewTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/anhh"
+                   android:layout_below="@id/nameTv"
+                   android:layout_marginTop="5dp"/>
+
+           </RelativeLayout>
+
+        </LinearLayout>
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_below="@id/infoUserLl"/>
+
+        <TextView
+            android:id="@+id/reviewTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ratingBar"
+            android:text="@string/this_is_good_product"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

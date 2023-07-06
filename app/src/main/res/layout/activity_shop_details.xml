@@ -155,6 +155,15 @@
             android:background="@color/transparent"
             android:contentDescription="@string/back"
             android:src="@drawable/baseline_arrow_back_ios_24" />
+
+        <ImageView
+            android:id="@+id/ratingShop"
+            android:layout_toStartOf="@+id/orderDetailsImB"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/baseline_star_border_24"
+            android:background="@color/transparent"/>
+
     </RelativeLayout>
 
     <RelativeLayout

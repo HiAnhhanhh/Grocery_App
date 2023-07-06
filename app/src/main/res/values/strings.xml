@@ -68,4 +68,13 @@
     <string name="total_amount_500">Total Amount : $500</string>
     <string name="order_details">Order Details</string>
     <string name="orderid">OrderId :</string>
+    <string name="write_review">Write Review</string>
+    <string name="how_was_your_experience_this_seller_n_your_feedback_is_important_to_improve_our_quantity_of_service">How was your experience this seller ? \n your feedback is important to improve our quantity of service</string>
+    <string name="type_review">Type ReView ...</string>
+    <string name="submit">Submit</string>
+    <string name="shop_reviews">Shop Reviews</string>
+    <string name="_4_3_100_200_333">4.3 [100,200,333]</string>
+    <string name="name">Name</string>
+    <string name="anhh">27/06/2001</string>
+    <string name="this_is_good_product">This is good product</string>
 </resources>
